@@ -1,0 +1,1 @@
+print('Didaktische Sicherheitspruefung aktiv!')

@@ -1,0 +1,6 @@
+{
+    "KI_LoopError": {
+        "Ursache": "name 'verlauf' is not defined",
+        "Loesung": "Ollama-Verbindung oder Chat-Verlauf gepr\u00fcft."
+    }
+}
