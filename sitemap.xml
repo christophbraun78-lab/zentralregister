@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://christophbraun78-lab.github.io/zentralregister/index.html</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://christophbraun78-lab.github.io/zentralregister/aemter.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://christophbraun78-lab.github.io/zentralregister/betreiber.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://christophbraun78-lab.github.io/zentralregister/anwaerter.html</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
