@@ -2,7 +2,7 @@ import os
 import sys
 
 # =====================================================================
-# CORE IDLE PROJEKT - REVENUE ENGINE & GOOGLE VERIFIED v10.1
+# CORE IDLE PROJEKT - REVENUE ENGINE & BRANDING v11.5
 # =====================================================================
 
 def load_index_data():
@@ -75,7 +75,7 @@ def generate_sitemap_xml():
 
 def prepare_deployment_metadata():
     with open("README.md", "w", encoding="utf-8") as f:
-        f.write("# Zentralregister für Arbeitsschutz & Hygiene\nCore Idle Projekt Informationsnetzwerk.\n")
+        f.write("# Praxis-Kompass Arbeitsschutz\nCore Idle Projekt Informationsnetzwerk.\n")
     with open(".gitignore", "w", encoding="utf-8") as f:
         f.write(".env\n*.pyc\n__pycache__/\n")
 
@@ -85,41 +85,39 @@ def generate_network_with_faqs():
         print("[FEHLER] Keine 'Zentralregister_Zielgruppen_Index.txt' gefunden!")
         return
 
-    # HIER WAR DER FEHLER: Das 'f' vor dem String wurde entfernt
     if os.path.exists("style.css"):
         with open("style.css", "r", encoding="utf-8") as css_f:
             clean_style = '<style>' + css_f.read() + '</style>'
     else:
         clean_style = '<style>body { font-family: sans-serif; }</style>'
 
-    print("\n[AGENT] Schalte Revenue-Engine auf... Injektiere Google-Verifizierung...")
+    print("\n[AGENT] Schalte Revenue-Engine auf... Injektiere Praxis-Kompass Branding...")
     data = split_content_by_target(raw_content)
 
     nav_bar = '<nav><a href="index.html">🏠 Startseite</a><a href="aemter.html">🏛️ Ämter & Behörden</a><a href="betreiber.html">🏢 Betreiber & Studios</a><a href="anwaerter.html">🎓 Beamtenanwärter</a></nav>'
 
-    # GOOGLE SITE VERIFICATION KEY
     google_tag = '<meta name="google-site-verification" content="HJYQ9n7LlloJpf-macnCXQR1E38ckMVlT3czmLz-RBs" />'
 
     # 1. INDEX.HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">{google_tag}<title>Zentralregister | Start</title><meta name="description" content="Informationsregister für Arbeitsschutzvorschriften.">{clean_style}</head><body><header><h1>Zentralregister für Arbeitsschutz & Hygiene</h1><p>Core Idle Informations-System v10.1</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Zentralregister</h2><p>Unser System analysiert fortlaufend die Gesetzestexte des Bundes und bereitet sie in verständlichen Praxis-Leitfäden auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">{google_tag}<title>Praxis-Kompass Arbeitsschutz | Start</title><meta name="description" content="Ihr privates Praxisportal für Arbeitsschutzvorschriften, Ruhezeiten im Schichtdienst und gesetzliche Sicherheitsunterweisungen.">{clean_style}</head><body><header><h1>Praxis-Kompass Arbeitsschutz</h1><p>Unabhängiges Informations-System v11.5</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Praxis-Kompass</h2><p>Unser unabhängiges System analysiert fortlaufend gesetzliche Rahmenbedingungen und bereitet sie in leicht verständlichen Praxis-Leitfäden für den Alltag auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
     # 2. AEMTER.HTML
     faqs_aemter = "".join([generate_faq_logic(b, "aemter") for b in data["aemter"]])
     with open("aemter.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Behörden-Terminal</title><meta name="description" content="Vorschriften für Schichtdienst.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #1e3c72, #162a4e);"><h1>🏛️ Behörden- & Ämter-Terminal</h1><p>Rechtssicherheit für Dienststellen und Schichtleiter</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #1e3c72;"><h2>Praxiswissen für den Dienstbetrieb</h2></div>{get_b2b_monetization_banner("aemter")}<h3>📌 Häufige Fragen aus der Verwaltungspraxis</h3><div class="faq-container">{faqs_aemter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Behörden-Terminal | Infos für Schichtdienst & Dienststellenleiter</title><meta name="description" content="Praxisnahe Leitfäden für Schichtdienstleiter und Dienststellen zur Umsetzung von Arbeitszeitverordnungen und Ruhezeiten.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #1e3c72, #162a4e);"><h1>🏛️ Behörden- & Ämter-Terminal</h1><p>Rechtssicherheit für Dienststellen und Schichtleiter</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #1e3c72;"><h2>Praxiswissen für den Dienstbetrieb</h2></div>{get_b2b_monetization_banner("aemter")}<h3>📌 Häufige Fragen aus der Verwaltungspraxis</h3><div class="faq-container">{faqs_aemter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
     # 3. BETREIBER.HTML
     faqs_betreiber = "".join([generate_faq_logic(b, "betreiber") for b in data["betreiber"]])
     with open("betreiber.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Betreiber-Kompass</title><meta name="description" content="Umsetzung der gesetzlichen Sicherheitsunterweisung.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #e67e22, #d35400);"><h1>🏢 Betreiber- & Studio-Kompass</h1><p>Vorschriften verständlich erklärt für die Praxis</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #e67e22;"><h2>Sicher durch die Betriebsprüfung</h2></div>{get_b2b_monetization_banner("betreiber")}<h3>📌 Wichtige Betreiber-Fragen im Überblick</h3><div class="faq-container">{faqs_betreiber}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Betreiber-Kompass | Unabhängiger Leitfaden</title><meta name="description" content="Praxisnahe Umsetzung der gesetzlichen Sicherheitsunterweisung für Betreiber und Studios nach § 12 ArbSchG.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #e67e22, #d35400);"><h1>🏢 Betreiber- & Studio-Kompass</h1><p>Vorschriften verständlich erklärt für die Praxis</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #e67e22;"><h2>Sicher durch die Betriebsprüfung</h2></div>{get_b2b_monetization_banner("betreiber")}<h3>📌 Wichtige Betreiber-Fragen im Überblick</h3><div class="faq-container">{faqs_betreiber}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
     # 4. ANWAERTER.HTML
     faqs_anwaerter = "".join([generate_faq_logic(b, "anwaerter") for b in data["anwaerter"]])
     with open("anwaerter.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Anwärter-Akademie</title><meta name="description" content="Klausurenstoff für Beamtenanwärter.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #2ecc71, #27ae60);"><h1>🎓 Die Anwärter-Akademie</h1><p>Prüfungserfolg und Didaktik für die Laufbahnprüfung</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #2ecc71;"><h2>Lernstoff für die Laufbahnprüfungen</h2></div>{get_b2b_monetization_banner("anwaerter")}<h3>📌 Klausurrelevante Frage-Muster</h3><div class="faq-container">{faqs_anwaerter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Anwärter-Akademie | Klausurenstoff & Aufsichtspflicht</title><meta name="description" content="Gutachterliche Prüfungsschemata und Erläuterungen zu Verordnungen und Arbeitsschutzgesetzen für Beamtenanwärter.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #2ecc71, #27ae60);"><h1>🎓 Die Anwärter-Akademie</h1><p>Prüfungserfolg und Didaktik für die Laufbahnprüfung</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #2ecc71;"><h2>Lernstoff für die Laufbahnprüfungen</h2></div>{get_b2b_monetization_banner("anwaerter")}<h3>📌 Klausurrelevante Frage-Muster</h3><div class="faq-container">{faqs_anwaerter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
-    print("[SUCCESS] Verifizierungs-Staging v10.1 abgeschlossen!")
+    print("[SUCCESS] Branding-Staging v11.5 abgeschlossen!")
     generate_sitemap_xml()
     prepare_deployment_metadata()
 
