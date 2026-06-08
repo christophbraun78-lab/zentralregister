@@ -2,7 +2,7 @@ import os
 import sys
 
 # =====================================================================
-# CORE IDLE PROJEKT - AUTOMATED CONTENT PIPELINE v12.0
+# CORE IDLE PROJEKT - AUTOMATED CONTENT PIPELINE & BRANDING v12.5
 # =====================================================================
 
 def load_index_data():
@@ -13,7 +13,7 @@ def load_index_data():
         return f.read()
 
 def split_content_by_target(raw_content):
-    # Trennt die Datei sauber anhand der 50 Bindestriche auf
+    # Trennt die Datei anhand der 50 Bindestriche auf
     blocks = raw_content.split("-" * 50)
     categorized = {"aemter": [], "betreiber": [], "anwaerter": []}
     
@@ -21,7 +21,7 @@ def split_content_by_target(raw_content):
         if "INHALT:" not in block:
             continue
             
-        # Wir filtern jetzt direkt und fehlerfrei nach deinen System-Schlagworten!
+        # Filterung nach den System-Schlagworten aus dem Index
         if "SCHLAGWORT: [GEFAHR]" in block:
             categorized["aemter"].append(block)
         elif "SCHLAGWORT: [UNTERWEISUNG]" in block:
@@ -39,7 +39,7 @@ def generate_faq_logic(block, target_group):
         if line.startswith("SCHLAGWORT:"): schlagwort = line.replace("SCHLAGWORT:", "").strip()
         if line.startswith("INHALT:"): inhalt = line.replace("INHALT:", "").strip()
     
-    # Bereinigt die eckigen Klammern für die Anzeige im Text
+    # Bereinigt die eckigen Klammern fuer die Anzeige
     display_sw = schlagwort.replace("[", "").replace("]", "").capitalize()
     
     if target_group == "aemter":
@@ -64,7 +64,8 @@ def get_b2b_monetization_banner(target_group):
 
 def generate_sitemap_xml():
     print("[SYSTEM] Generiere digitale Landkarte für Google -> sitemap.xml...")
-    base_url = "https://christophbraun78-lab.github.io/zentralregister/"
+    # Deine brandneue, anonyme Firmen-URL für Google verankert
+    base_url = "https://praxiskompass-arbeitsschutz.de/"
     pages = ["index.html", "aemter.html", "betreiber.html", "anwaerter.html"]
     
     xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -94,7 +95,7 @@ def generate_network_with_faqs():
     else:
         clean_style = '<style>body { font-family: sans-serif; }</style>'
 
-    print("\n[AGENT] Schalte Core Idle Pipeline v12.0 scharf...")
+    print("\n[AGENT] Schalte Core Idle Pipeline v12.5 mit neuer Domain scharf...")
     data = split_content_by_target(raw_content)
 
     nav_bar = '<nav><a href="index.html">🏠 Startseite</a><a href="aemter.html">🏛️ Ämter & Behörden</a><a href="betreiber.html">🏢 Betreiber & Studios</a><a href="anwaerter.html">🎓 Beamtenanwärter</a></nav>'
@@ -103,7 +104,7 @@ def generate_network_with_faqs():
 
     # 1. INDEX.HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">{google_tag}<title>Praxis-Kompass Arbeitsschutz | Start</title><meta name="description" content="Ihr privates Praxisportal für Arbeitsschutzvorschriften, Ruhezeiten im Schichtdienst und gesetzliche Sicherheitsunterweisungen.">{clean_style}</head><body><header><h1>Praxis-Kompass Arbeitsschutz</h1><p>Unabhängiges Informations-System v12.0</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Praxis-Kompass</h2><p>Unser unbhängiges System analysiert fortlaufend gesetzliche Rahmenbedingungen und bereitet sie in leicht verständlichen Praxis-Leitfäden für den Alltag auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente geladen.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen aktiv.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen bereit.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">{google_tag}<title>Praxis-Kompass Arbeitsschutz | Start</title><meta name="description" content="Ihr privates Praxisportal für Arbeitsschutzvorschriften, Ruhezeiten im Schichtdienst und gesetzliche Sicherheitsunterweisungen.">{clean_style}</head><body><header><h1>Praxis-Kompass Arbeitsschutz</h1><p>Unabhängiges Informations-System v12.5</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Praxis-Kompass</h2><p>Unser unabhängiges System analysiert fortlaufend gesetzliche Rahmenbedingungen und bereitet sie in leicht verständlichen Praxis-Leitfäden für den Alltag auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente geladen.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen aktiv.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen bereit.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
     # 2. AEMTER.HTML
     faqs_aemter = "".join([generate_faq_logic(b, "aemter") for b in data["aemter"]])
@@ -120,7 +121,7 @@ def generate_network_with_faqs():
     with open("anwaerter.html", "w", encoding="utf-8") as f:
         f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Anwärter-Akademie | Klausurenstoff & Aufsicht</title><meta name="description" content="Gutachterliche Prüfungsschemata und Erläuterungen zu Verordnungen für Beamtenanwärter.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #2ecc71, #27ae60);"><h1>🎓 Die Anwärter-Akademie</h1><p>Prüfungserfolg und Didaktik für die Laufbahnprüfung</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #2ecc71;"><h2>Lernstoff für die Laufbahnprüfungen</h2></div>{get_b2b_monetization_banner("anwaerter")}<h3>📌 Klausurrelevante Frage-Muster</h3><div class="faq-container">{faqs_anwaerter if faqs_anwaerter else "<p>Aktualisiere Datenbank-Segmente...</p>"}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
-    print("[SUCCESS] Pipeline-Staging v12.0 abgeschlossen!")
+    print("[SUCCESS] Pipeline-Staging v12.5 abgeschlossen!")
     generate_sitemap_xml()
     prepare_deployment_metadata()
 
