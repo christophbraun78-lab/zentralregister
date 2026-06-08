@@ -3,7 +3,7 @@ import sys
 import time
 
 # =====================================================================
-# CORE IDLE PROJEKT - FAQ ENGINE & DEPLOYMENT PREPARATION v7.0
+# CORE IDLE PROJEKT - FAQ AUTOMATION & SEO ENGINE v7.5
 # =====================================================================
 
 def load_index_data():
@@ -61,37 +61,14 @@ def generate_faq_logic(block, target_group):
     """
 
 def prepare_deployment_metadata():
-    """
-    Erstellt die notwendigen Metadaten und Konfigurationen,
-    damit das Projekt direkt plattformunabhängig ins Netz geladen werden kann.
-    """
-    print("\n[AGENT] Starte Phase 4: Online-Staging-Vorbereitung...")
-    print("[SYSTEM] Generiere Webserver-Konfiguration und Projekt-Dokumentation...")
-    
-    # 1. Erstellung einer professionellen README für das Hosting-Repository
     readme_content = """# Zentralregister für Arbeitsschutz & Hygiene
 Vollautomatisch generiertes und indexiertes Informationsportal des Core Idle Projekts.
-
-## Struktur
-- `index.html` - Hauptportal & Datenbankstatus
-- `aemter.html` - Terminal für Behörden & Dienststellenleiter
-- `betreiber.html` - Kompass für Gewerbebetreibende & Studios
-- `anwaerter.html` - Akademie für den Verwaltungsnachwuchs
-
-## Technologie
-- Pure HTML5 / CSS3 (Maximale Pagespeed-Performance für Google Ads)
-- Lokale Python-Parsing-Pipeline v7.0
 """
     with open("README.md", "w", encoding="utf-8") as f:
         f.write(readme_content)
-    print("[SPEICHERN] Dokumentation erstellt -> README.md")
-
-    # 2. .gitignore hinzufügen, damit deine geheimen .env-Dateien NIEMALS im Internet landen!
     gitignore_content = ".env\n*.pyc\n__pycache__/\n"
     with open(".gitignore", "w", encoding="utf-8") as f:
         f.write(gitignore_content)
-    print("[SICHERHEIT] Sicherheitsfilter hinterlegt -> .gitignore (.env geschützt)")
-    print("[SUCCESS] Staging abgeschlossen. Bereit für den finalen Push ins Web.")
 
 def generate_network_with_faqs():
     raw_content = load_index_data()
@@ -99,7 +76,7 @@ def generate_network_with_faqs():
         print("[FEHLER] Keine 'Zentralregister_Zielgruppen_Index.txt' gefunden!")
         return
 
-    print("\n[AGENT] Schalte FAQ-Schmiede auf... Generiere Deep-Content-Netzwerk...")
+    print("\n[AGENT] Optimiere SEO-Struktur und generiere Webseiten...")
     data = split_content_by_target(raw_content)
 
     shared_style = """
@@ -129,10 +106,14 @@ def generate_network_with_faqs():
     </nav>
     """
 
-    # 1. INDEX.HTML
+    # 1. INDEX.HTML (SEO Optimiert)
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Zentralregister | Start</title>{shared_style}</head><body>
-        <header><h1>Zentralregister für Arbeitsschutz & Hygiene</h1><p>Core Idle Informations-System v7.0</p></header>{nav_bar}
+        f.write(f"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+        <title>Zentralregister für Arbeitsschutz & Hygiene | Core Idle Portal</title>
+        <meta name="description" content="Offizielles Informationsregister für Arbeitsschutzvorschriften, Ruhezeiten im Schichtdienst und gesetzliche Sicherheitsunterweisungen nach ArbSchG und ArbZG.">
+        <meta name="keywords" content="Arbeitsschutz, Hygienevorschriften, Arbeitszeitgesetz, Schichtdienstleiter, Gewerbeamt, Dienstunterweisung">
+        {shared_style}</head><body>
+        <header><h1>Zentralregister für Arbeitsschutz & Hygiene</h1><p>Core Idle Informations-System v7.5</p></header>{nav_bar}
         <div class="container"><div class="hero-box"><h2>Willkommen beim Zentralregister</h2><p>Unser System analysiert fortlaufend die Gesetzestexte des Bundes und bereitet sie in verständlichen Praxis-Leitfäden auf.</p></div>
         <div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;">
             <h3>📊 Aktueller Datenbank-Status:</h3>
@@ -141,33 +122,40 @@ def generate_network_with_faqs():
             <p>• <strong>Anwärter-Akademie:</strong> {len(data['anwaerter'])} Prüfungsrelevante Normen katalogisiert.</p>
         </div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>""")
 
-    # 2. AEMTER.HTML
+    # 2. AEMTER.HTML (SEO Optimiert)
     faqs_aemter = "".join([generate_faq_logic(b, "aemter") for b in data["aemter"]])
     with open("aemter.html", "w", encoding="utf-8") as f:
-        f.write(f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Ämter & Behörden</title>{shared_style}</head><body>
+        f.write(f"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+        <title>Behörden-Terminal | Vorschriften für Schichtdienst & Dienststellenleiter</title>
+        <meta name="description" content="Rechtssichere Leitfäden für Schichtdienstleiter und Dienststellen zur Umsetzung von Arbeitszeitverordnungen, Ruhezeiten und behördlichen Auflagen.">
+        {shared_style}</head><body>
         <header style="background: linear-gradient(135deg, #1e3c72, #162a4e);"><h1>🏛️ Behörden- & Ämter-Terminal</h1><p>Rechtssicherheit für Dienststellen und Schichtleiter</p></header>{nav_bar}
         <div class="container"><div class="hero-box" style="border-left-color: #1e3c72;"><h2>Praxiswissen für den Dienstbetrieb</h2></div>
         <h3>📌 Häufige Fragen aus der Verwaltungspraxis</h3><div class="faq-container">{faqs_aemter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>""")
 
-    # 3. BETREIBER.HTML
+    # 3. BETREIBER.HTML (SEO Optimiert)
     faqs_betreiber = "".join([generate_faq_logic(b, "betreiber") for b in data["betreiber"]])
     with open("betreiber.html", "w", encoding="utf-8") as f:
-        f.write(f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Betreiber & Studios</title>{shared_style}</head><body>
+        f.write(f"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+        <title>Betreiber-Kompass | Sicherheitsunterweisung & Gewerbeamt-Leitfaden</title>
+        <meta name="description" content="Praxisnahe Umsetzung der gesetzlichen Sicherheitsunterweisung für Betreiber und Studios nach § 12 ArbSchG zur Vermeidung von Bußgeldern des Gewerbeamtes.">
+        {shared_style}</head><body>
         <header style="background: linear-gradient(135deg, #e67e22, #d35400);"><h1>🏢 Betreiber- & Studio-Kompass</h1><p>Vorschriften verständlich erklärt für die Praxis</p></header>{nav_bar}
         <div class="container"><div class="hero-box" style="border-left-color: #e67e22;"><h2>Sicher durch die Betriebsprüfung</h2></div>
         <h3>📌 Wichtige Betreiber-Fragen im Überblick</h3><div class="faq-container">{faqs_betreiber}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>""")
 
-    # 4. ANWAERTER.HTML
+    # 4. ANWAERTER.HTML (SEO Optimiert)
     faqs_anwaerter = "".join([generate_faq_logic(b, "anwaerter") for b in data["anwaerter"]])
     with open("anwaerter.html", "w", encoding="utf-8") as f:
-        f.write(f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Beamtenanwärter</title>{shared_style}</head><body>
+        f.write(f"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+        <title>Anwärter-Akademie | Klausurenstoff & Aufsichtspflicht für Laufbahnprüfungen</title>
+        <meta name="description" content="Gutachterliche Prüfungsschemata und Erläuterungen zu Verordnungen und Arbeitsschutzgesetzen für Beamtenanwärter der Justiz und Verwaltung.">
+        {shared_style}</head><body>
         <header style="background: linear-gradient(135deg, #2ecc71, #27ae60);"><h1>🎓 Die Anwärter-Akademie</h1><p>Prüfungserfolg und Didaktik für die Laufbahnprüfung</p></header>{nav_bar}
         <div class="container"><div class="hero-box" style="border-left-color: #2ecc71;"><h2>Lernstoff für die Laufbahnprüfungen</h2></div>
         <h3>📌 Klausurrelevante Frage-Muster</h3><div class="faq-container">{faqs_anwaerter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>""")
 
-    print("[SUCCESS] Content-Schmiede abgeschlossen!")
-    
-    # Nach der Content-Generierung werfen wir direkt die Online-Schnittstelle an
+    print("[SUCCESS] SEO-Pipeline abgeschlossen!")
     prepare_deployment_metadata()
 
 if __name__ == "__main__":
