@@ -2,7 +2,7 @@ import os
 import sys
 
 # =====================================================================
-# CORE IDLE PROJEKT - REVENUE ENGINE & AUTOMATED SITEMAP v9.5
+# CORE IDLE PROJEKT - REVENUE ENGINE & GOOGLE VERIFIED v10.1
 # =====================================================================
 
 def load_index_data():
@@ -85,21 +85,24 @@ def generate_network_with_faqs():
         print("[FEHLER] Keine 'Zentralregister_Zielgruppen_Index.txt' gefunden!")
         return
 
-    # Lädt das CSS sicher aus der separaten Datei
+    # HIER WAR DER FEHLER: Das 'f' vor dem String wurde entfernt
     if os.path.exists("style.css"):
         with open("style.css", "r", encoding="utf-8") as css_f:
-            clean_style = f'<style>{css_f.read()}</style>'
+            clean_style = '<style>' + css_f.read() + '</style>'
     else:
         clean_style = '<style>body { font-family: sans-serif; }</style>'
 
-    print("\n[AGENT] Schalte Revenue-Engine auf... Generiere auslagerungssicheren Code...")
+    print("\n[AGENT] Schalte Revenue-Engine auf... Injektiere Google-Verifizierung...")
     data = split_content_by_target(raw_content)
 
     nav_bar = '<nav><a href="index.html">🏠 Startseite</a><a href="aemter.html">🏛️ Ämter & Behörden</a><a href="betreiber.html">🏢 Betreiber & Studios</a><a href="anwaerter.html">🎓 Beamtenanwärter</a></nav>'
 
+    # GOOGLE SITE VERIFICATION KEY
+    google_tag = '<meta name="google-site-verification" content="HJYQ9n7LlloJpf-macnCXQR1E38ckMVlT3czmLz-RBs" />'
+
     # 1. INDEX.HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Zentralregister | Start</title><meta name="description" content="Informationsregister für Arbeitsschutzvorschriften.">{clean_style}</head><body><header><h1>Zentralregister für Arbeitsschutz & Hygiene</h1><p>Core Idle Informations-System v9.5</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Zentralregister</h2><p>Unser System analysiert fortlaufend die Gesetzestexte des Bundes und bereitet sie in verständlichen Praxis-Leitfäden auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
+        f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">{google_tag}<title>Zentralregister | Start</title><meta name="description" content="Informationsregister für Arbeitsschutzvorschriften.">{clean_style}</head><body><header><h1>Zentralregister für Arbeitsschutz & Hygiene</h1><p>Core Idle Informations-System v10.1</p></header>{nav_bar}<div class="container"><div class="hero-box"><h2>Willkommen beim Zentralregister</h2><p>Unser System analysiert fortlaufend die Gesetzestexte des Bundes und bereitet sie in verständlichen Praxis-Leitfäden auf.</p></div>{get_b2b_monetization_banner("betreiber")}<div class="hero-box" style="border-left-color: #2ecc71; background: #fdfdfd;"><h3>📊 Aktueller Datenbank-Status:</h3><p style="margin-top: 10px;">• <strong>Behörden-Terminal:</strong> {len(data["aemter"])} Segmente.</p><p>• <strong>Betreiber-Kompass:</strong> {len(data["betreiber"])} Unterweisungen.</p><p>• <strong>Anwärter-Akademie:</strong> {len(data["anwaerter"])} Normen.</p></div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
     # 2. AEMTER.HTML
     faqs_aemter = "".join([generate_faq_logic(b, "aemter") for b in data["aemter"]])
@@ -116,7 +119,7 @@ def generate_network_with_faqs():
     with open("anwaerter.html", "w", encoding="utf-8") as f:
         f.write(f'<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Anwärter-Akademie</title><meta name="description" content="Klausurenstoff für Beamtenanwärter.">{clean_style}</head><body><header style="background: linear-gradient(135deg, #2ecc71, #27ae60);"><h1>🎓 Die Anwärter-Akademie</h1><p>Prüfungserfolg und Didaktik für die Laufbahnprüfung</p></header>{nav_bar}<div class="container"><div class="hero-box" style="border-left-color: #2ecc71;"><h2>Lernstoff für die Laufbahnprüfungen</h2></div>{get_b2b_monetization_banner("anwaerter")}<h3>📌 Klausurrelevante Frage-Muster</h3><div class="faq-container">{faqs_anwaerter}</div></div><footer>&copy; 2026 Core Idle Projekt</footer></body></html>')
 
-    print("[SUCCESS] Revenue-Staging v9.5 abgeschlossen!")
+    print("[SUCCESS] Verifizierungs-Staging v10.1 abgeschlossen!")
     generate_sitemap_xml()
     prepare_deployment_metadata()
 
